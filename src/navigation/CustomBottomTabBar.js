@@ -11,24 +11,9 @@ export default function CustomBottomTabBar({
 }) {
   return (
     <View style={styles.tabBarContainer} {...props}>
-      {/* <View
-        style={{
-          height: 0.5,
-          width: SizeClass.SCREEN_WIDTH,
-          backgroundColor: 'gray',
-          position: 'absolute',
-          top: 0,
-        }}></View> */}
       <View style={styles.tabBar}>
         {state.routes.map((route, index) => {
           const {options} = descriptors[route.key];
-          console.log('OPTIONS', options);
-          const label =
-            options.tabBarLabel !== undefined
-              ? options.tabBarLabel
-              : options.title !== undefined
-              ? options.title
-              : route.name;
 
           const isFocused = state.index === index;
           const {title} = route.params;
