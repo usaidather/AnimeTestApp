@@ -1,6 +1,7 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {ScreenConst} from '../const';
+import {ScreenConst, StringConst} from '../const';
+import CustomBottomTabBar from './CustomBottomTabBar';
 import AnimeListAiring from '../screens/AnimeListAiring/AnimeListAiringIndex';
 import AnimeListComplete from '../screens/AnimeListComplete/AnimeListCompleteIndex';
 import AnimeListUpcoming from '../screens/AnimeListUpcoming/AnimeListUpcomingIndex';
@@ -8,20 +9,39 @@ import AnimeListUpcoming from '../screens/AnimeListUpcoming/AnimeListUpcomingInd
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabStack() {
+  const tabs = [
+    {
+      id: 0,
+      name: ScreenConst.ANIMELISTAIRING,
+      component: AnimeListAiring,
+      title: StringConst.Airing,
+    },
+    {
+      id: 0,
+      name: ScreenConst.ANIMELISTCOMPLETE,
+      component: AnimeListComplete,
+      title: StringConst.Completed,
+    },
+    {
+      id: 0,
+      name: ScreenConst.ANIMELISTUPCOMING,
+      component: AnimeListUpcoming,
+      title: StringConst.Upcoming,
+    },
+  ];
+
   return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name={ScreenConst.ANIMELISTAIRING}
-        component={AnimeListAiring}
-      />
-      <Tab.Screen
-        name={ScreenConst.ANIMELISTCOMPLETE}
-        component={AnimeListComplete}
-      />
-      <Tab.Screen
-        name={ScreenConst.ANIMELISTUPCOMING}
-        component={AnimeListUpcoming}
-      />
+    <Tab.Navigator tabBar={props => <CustomBottomTabBar {...props} />}>
+      {tabs.map((item, index) => (
+        <Tab.Screen
+          key={index}
+          initialParams={{
+            title: item?.title,
+          }}
+          name={item.name}
+          component={item.component}
+        />
+      ))}
     </Tab.Navigator>
   );
 }
