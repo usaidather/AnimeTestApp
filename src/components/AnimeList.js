@@ -1,61 +1,11 @@
 import {StyleSheet, Text, View, FlatList} from 'react-native';
 import React from 'react';
-import {ColorConst} from '../const';
+import {ColorConst, ImageConst} from '../const';
 import {SizeClass} from '../utils/AppTheme';
 import {FastImage} from '.';
 
-export default function AnimeList() {
-  const DATA = [
-    {
-      title_english:
-        'Samurai X: Trust and Betrayal Samurai X: Trust and Betrayal',
-      status: 'Finished Airing',
-      score: 8.71,
-      year: '2021',
-    },
-    {
-      title_english: 'Samurai X: Trust and Betrayal',
-      status: 'Finished Airing',
-      score: 8.71,
-      year: '2022',
-    },
-    {
-      title_english: 'Samurai X:',
-      status: 'Finished Airing',
-      score: 8.71,
-      year: '1993',
-    },
-    {
-      title_english: 'Samurai X: Trust and Betrayal',
-      status: 'Finished Airing',
-      score: 8.71,
-      year: '',
-    },
-    {
-      title_english: 'Samurai X: Trust and Betrayal',
-      status: 'Finished Airing',
-      score: 8.71,
-      year: '',
-    },
-    {
-      title_english: 'Samurai X: Trust and Betrayal',
-      status: 'Finished Airing',
-      score: 8.71,
-      year: '',
-    },
-    {
-      title_english: 'Samurai X: Trust and Betrayal',
-      status: 'Finished Airing',
-      score: 8.71,
-      year: '',
-    },
-    {
-      title_english: 'Samurai X: Trust and Betrayal',
-      status: 'Finished Airing',
-      score: 8.71,
-      year: '',
-    },
-  ];
+export default function AnimeList(props) {
+  const {data, onEndReached} = props;
 
   const renderItem = ({item}) => (
     <View style={styles.item}>
@@ -63,33 +13,52 @@ export default function AnimeList() {
         imageStyle={styles.itemImage}
         cover
         source={{
-          uri: 'https://cdn.myanimelist.net/images/anime/1391/120839.jpg',
+          uri: item?.images?.jpg?.large_image_url,
         }}
       />
       <View style={styles.itemTitleContainer}>
         <Text numberOfLines={2} style={styles.title}>
-          {item?.title_english}
+          {item?.title}
         </Text>
-        <View style={styles.itemYearContainer}>
-          <Text style={styles.year}>{item?.year}</Text>
+        {item?.year && (
+          <View style={styles.itemYearContainer}>
+            <Text style={styles.year}>{item?.year}</Text>
+          </View>
+        )}
+      </View>
+      {item?.rating && (
+        <View style={styles.itemRatingContainer}>
+          <FastImage
+            imageStyle={styles.icon}
+            cover
+            source={ImageConst.pgRatingIcon}
+          />
+          <Text>{item?.rating}</Text>
         </View>
-      </View>
-      <View style={styles.itemScoreContainer}>
-        <Text>Score</Text>
-      </View>
-
-      <View style={styles.itemRatingContainer}>
-        <Text>Rating</Text>
-      </View>
+      )}
+      {item?.score && (
+        <View style={styles.itemScoreContainer}>
+          <FastImage
+            imageStyle={styles.icon}
+            cover
+            source={ImageConst.scoreIcon}
+          />
+          <Text style={{fontWeight: 'bold', fontSize: SizeClass.scaleFont(15)}}>
+            {item?.score}
+          </Text>
+        </View>
+      )}
     </View>
   );
 
   return (
     <View style={{flex: 1, paddingVertical: SizeClass.SMALL_MARGIN}}>
       <FlatList
-        data={DATA}
+        data={data}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item?.mal_id}
+        onEndReachedThreshold={0.5}
+        onEndReached={onEndReached}
       />
     </View>
   );
@@ -119,6 +88,11 @@ const styles = StyleSheet.create({
     height: SizeClass.SCREEN_HEIGHT / 4,
     borderRadius: SizeClass.DEFAULT_MARGIN,
   },
+  icon: {
+    width: SizeClass.LARGE_MARGIN,
+    height: SizeClass.LARGE_MARGIN,
+    marginRight: SizeClass.SMALL_MARGIN,
+  },
   itemTitleContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -138,14 +112,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: SizeClass.DEFAULT_MARGIN,
     paddingVertical: SizeClass.SMALL_MARGIN,
     borderRadius: SizeClass.LARGE_MARGIN,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   itemRatingContainer: {
-    backgroundColor: ColorConst.white,
-    position: 'absolute',
-    top: SizeClass.LARGE_MARGIN,
-    right: SizeClass.LARGE_MARGIN,
+    backgroundColor: ColorConst.themeYellow,
+    marginBottom: SizeClass.DEFAULT_MARGIN,
     paddingHorizontal: SizeClass.DEFAULT_MARGIN,
     paddingVertical: SizeClass.SMALL_MARGIN,
     borderRadius: SizeClass.LARGE_MARGIN,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });

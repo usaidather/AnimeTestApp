@@ -4,12 +4,16 @@ import {ColorConst, ScreenConst, StringConst} from '../../const';
 import {Header, AnimeList} from '../../components/';
 
 export default function AnimeListAiring(props) {
+  const {anime, onEndReached} = props;
+
   return (
-    <View style={{backgroundColor: ColorConst.white, flex: 1}}>
+    <View style={styles.container}>
       <Header title={StringConst.Anime} />
-      <AnimeList />
+      <AnimeList data={anime} onEndReached />
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {backgroundColor: ColorConst.white, flex: 1},
+});
