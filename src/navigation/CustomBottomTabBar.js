@@ -62,7 +62,7 @@ export default function CustomBottomTabBar({
 
 const styles = StyleSheet.create({
   tabItemTitle: isFocused => ({
-    color: isFocused ? ColorConst.white : ColorConst.black,
+    color: isFocused ? ColorConst.themeYellow : ColorConst.themeColor,
   }),
   tabItemContainer: {
     alignItems: 'center',
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   tabBarItem: isFocused => ({
     flex: 1,
-    backgroundColor: isFocused ? ColorConst.black : null,
+    backgroundColor: isFocused ? ColorConst.themeColor : null,
     borderRadius: SizeClass.LARGE_MARGIN,
     justifyContent: 'center',
     alignItems: 'center',
@@ -82,11 +82,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: SizeClass.DEFAULT_MARGIN,
     justifyContent: 'center',
     paddingBottom: SizeClass.DEFAULT_MARGIN,
-    backgroundColor: 'null',
+    backgroundColor: ColorConst.white,
+    paddingTop: 10,
   },
   tabBar: {
     flexDirection: 'row',
-    backgroundColor: ColorConst.white,
+    backgroundColor: ColorConst.themeYellow,
     paddingVertical: SizeClass.SCREEN_HEIGHT * 0.01,
     borderRadius: 4 * SizeClass.LARGE_MARGIN,
     borderWidth: 1,

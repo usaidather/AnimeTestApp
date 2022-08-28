@@ -14,10 +14,10 @@ export default function DrawerStack() {
     <Drawer.Navigator
       screenOptions={{
         headerShown: false,
-        headerTintColor: ColorConst.black,
+        headerTintColor: ColorConst.themeColor,
         drawerActiveTintColor: ColorConst.white,
-        drawerInactiveTintColor: ColorConst.black,
-        drawerActiveBackgroundColor: ColorConst.black,
+        drawerInactiveTintColor: ColorConst.themeColor,
+        drawerActiveBackgroundColor: ColorConst.themeColor,
         drawerItemStyle: {
           borderRadius: SizeClass.SCREEN_HEIGHT / 3,
           paddingHorizontal: SizeClass.LARGE_MARGIN,
