@@ -4,12 +4,17 @@ import {ColorConst, ScreenConst, StringConst} from '../../const';
 import {Header, AnimeList} from '../../components/';
 
 export default function AnimeListAiring(props) {
-  const {anime, onEndReached} = props;
+  const {anime, onEndReached, isLoading, isLoadingMore} = props;
 
   return (
     <View style={styles.container}>
       <Header title={StringConst.Anime} />
-      <AnimeList data={anime} onEndReached />
+      <AnimeList
+        isLoading={isLoading}
+        data={anime}
+        onEndReached={onEndReached}
+        isLoadingMore={isLoadingMore}
+      />
     </View>
   );
 }

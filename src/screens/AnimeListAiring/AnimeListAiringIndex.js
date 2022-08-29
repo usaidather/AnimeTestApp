@@ -7,6 +7,7 @@ export default function AnimeListAiringIndex(props) {
   const [response, setResponse] = useState(null);
   const [animeList, setAnimeList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [page, setPage] = useState(1);
 
   const FILTER = 'airing';
@@ -14,39 +15,47 @@ export default function AnimeListAiringIndex(props) {
 
   useEffect(() => {
     if (!isLoading) {
+      setIsLoading(true);
       callAnimeListAPI();
     }
   }, []);
 
   const onEndReached = () => {
     if (response?.pagination?.has_next_page) {
+      setIsLoadingMore(true);
       callAnimeListAPI();
     }
   };
 
   const callAnimeListAPI = () => {
-    setIsLoading(true);
     getAnimeList(page, FILTER, ITEM_LIMIT)
       .then(response => {
         if (response.status === 200) {
-          setIsLoading(false);
           setResponse(response?.data);
           let array = [...animeList, ...response?.data?.data];
           setAnimeList(array);
 
-          // if (response?.data?.pagination?.has_next_page) {
           setPage(page + 1);
-          // }
+
+          setIsLoading(false);
+          setIsLoadingMore(true);
         }
       })
       .catch(error => {
         alert(error);
         setIsLoading(false);
+        setIsLoadingMore(true);
       });
   };
 
   return (
-    <AnimeListAiring anime={animeList} onEndReached={onEndReached} {...props} />
+    <AnimeListAiring
+      isLoading={isLoading}
+      anime={animeList}
+      onEndReached={onEndReached}
+      isLoadingMore={isLoadingMore}
+      {...props}
+    />
   );
 }
 
