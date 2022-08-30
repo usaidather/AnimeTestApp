@@ -9,18 +9,18 @@ export default function AnimeListUpcomingIndex(props) {
   const FILTER = 'upcoming';
 
   useEffect(() => {
-    setIsLoading(false);
+    setIsLoading(true);
     getAnimeList(1, FILTER)
       .then(response => {
         if (response.status === 200) {
           setResponse(response?.data?.data);
-          setIsLoading(true);
+          setIsLoading(false);
         }
       })
       .catch(error => {
         alert(error);
-        setIsLoading(true);
-      });
+        setIsLoading(false);
+ƒ      });
   }, []);
 
   return (
