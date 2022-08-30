@@ -1,14 +1,19 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Header, AnimeList} from '../../components/';
-import {ColorConst, ScreenConst, StringConst} from '../../const';
+import {ColorConst, StringConst} from '../../const';
 
 export default function AnimeListUpcoming(props) {
-  const {anime, isLoading} = props;
+  const {anime, onEndReached, isLoading, isLoadingMore} = props;
   return (
     <View style={styles.container}>
       <Header title={StringConst.Anime} />
-      <AnimeList isLoading={isLoading} data={anime} />
+      <AnimeList
+        isLoading={isLoading}
+        data={anime}
+        onEndReached={onEndReached}
+        isLoadingMore={isLoadingMore}
+      />
     </View>
   );
 }

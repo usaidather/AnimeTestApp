@@ -12,7 +12,7 @@ import ButtonWithImage from './ButtonWithImage';
 import {useNavigation} from '@react-navigation/core';
 
 export default function CustomHeader(props) {
-  const {title} = props;
+  const {title, showBack = false} = props;
   const frame = useSafeAreaFrame();
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
@@ -29,7 +29,7 @@ export default function CustomHeader(props) {
           paddingTop: insets.top,
         }}>
         <View style={styles.leftItemContainer}>
-          {navigation.canGoBack() ? (
+          {showBack ? (
             <ButtonWithImage
               IconStyle={styles.icon}
               icon={ImageConst.back}

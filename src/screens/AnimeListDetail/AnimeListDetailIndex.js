@@ -4,15 +4,20 @@ import AnimeListDetail from './AnimeListDetail';
 import {getAnimeById} from '../../services/APIS/AnimeAPI';
 
 export default function AnimeListDetailIndex(props) {
-  const {id} = props?.route?.params;
+  const {item} = props?.route?.params;
   const [detail, setDetail] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
-    getAnimeById(id)
+    getAnimeById(item?.mal_id)
       .then(response => {
-        setDetail(response?.data?.data);
+        setDetail({
+          ...response?.data?.data,
+          favourite: item?.favourite,
+        });
+        r;
+
         setIsLoading(false);
       })
       .catch(error => {
@@ -20,7 +25,7 @@ export default function AnimeListDetailIndex(props) {
       });
   }, []);
 
-  return <AnimeListDetail detail={detail} {...props} />;
+  return <AnimeListDetail isLoading={isLoading} detail={detail} {...props} />;
 }
 
 const styles = StyleSheet.create({});

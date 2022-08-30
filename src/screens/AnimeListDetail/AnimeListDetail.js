@@ -1,18 +1,26 @@
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import Header from '../../components/Header';
-import {AnimeListItem, ButtonWithImage} from '../../components';
+import {AnimeListItem, ButtonWithImage, Loader} from '../../components';
 import {ColorConst, ImageConst} from '../../const';
 import {SizeClass} from '../../utils/AppTheme';
 
 export default function AnimeListDetail(props) {
-  const {detail} = props;
+  const {detail, isLoading} = props;
   return (
     <View style={styles.container}>
-      <Header title={'Home'} />
+      <Header title={'Home'} showBack={true} />
       <ScrollView>
-        {detail && <AnimeListItem item={detail} />}
-        <Text style={styles.descriptionStyle}>{detail?.synopsis}</Text>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          detail && (
+            <>
+              <AnimeListItem item={detail} />
+              <Text style={styles.descriptionStyle}>{detail?.synopsis}</Text>
+            </>
+          )
+        )}
       </ScrollView>
     </View>
   );

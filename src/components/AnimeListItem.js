@@ -1,64 +1,100 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {SizeClass} from '../utils/AppTheme';
-import {ColorConst, ImageConst} from '../const';
+import {ColorConst, ImageConst, ScreenConst} from '../const';
 import {ButtonWithImage, FastImage} from '.';
+import {markFavourite, unMarkFavourite} from '../redux/FavouriteSlice';
+import {useDispatch} from 'react-redux';
+import {useNavigation} from '@react-navigation/core';
 
 export default function AnimeListItem(props) {
-  const {item} = props;
+  let {item} = props;
+  const [listItem, setListItem] = useState(item);
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+
+  const onPress = () => {
+    console.log('LISTITEM:', listItem);
+    navigation.navigate(ScreenConst.ANIMELISTDETAIL, {item: listItem});
+  };
+
+  const onPressMarkUnMarkFavourite = item => {
+    let favouriteItem = item;
+    setListItem({
+      ...favouriteItem,
+      favourite:
+        favouriteItem?.favorite != null ? !favouriteItem?.favorite : true,
+    });
+
+    if (item?.favourite) {
+      dispatch(unMarkFavourite(favouriteItem));
+    } else {
+      dispatch(markFavourite(listItem));
+    }
+  };
+
   return (
-    <View style={styles.item}>
-      <FastImage
-        imageStyle={styles.itemImage}
-        cover
-        source={{
-          uri: item?.images?.jpg?.large_image_url,
-        }}
-      />
-
-      <View style={styles.itemTitleContainer}>
-        <Text numberOfLines={2} style={styles.title}>
-          {item?.title}
-        </Text>
-        {item?.year && (
-          <View style={styles.itemYearContainer}>
-            <Text style={styles.year}>{item?.year}</Text>
-          </View>
-        )}
-      </View>
-      {item?.rating && (
-        <View style={styles.itemRatingContainer}>
-          <FastImage
-            imageStyle={styles.icon}
-            cover
-            source={ImageConst.pgRatingIcon}
-          />
-          <Text>{item?.rating}</Text>
-        </View>
-      )}
-
-      {item?.score && (
-        <View style={styles.itemScoreContainer}>
-          <FastImage
-            imageStyle={styles.icon}
-            cover
-            source={ImageConst.scoreIcon}
-          />
-          <Text style={{fontWeight: 'bold', fontSize: SizeClass.scaleFont(15)}}>
-            {item?.score}
-          </Text>
-        </View>
-      )}
-      <View style={styles.favContainer}>
-        <ButtonWithImage
-          icon={item?.isFavourite ? ImageConst.fav : ImageConst.unfav}
-          IconStyle={{
-            width: SizeClass.LARGE_MARGIN,
-            height: SizeClass.LARGE_MARGIN,
+    <TouchableOpacity
+      onPress={() => {
+        onPress();
+      }}>
+      <View style={styles.item}>
+        <FastImage
+          imageStyle={styles.itemImage}
+          cover
+          source={{
+            uri: listItem?.images?.jpg?.large_image_url,
           }}
         />
+
+        <View style={styles.itemTitleContainer}>
+          <Text numberOfLines={2} style={styles.title}>
+            {listItem?.title}
+          </Text>
+          {listItem?.year && (
+            <View style={styles.itemYearContainer}>
+              <Text style={styles.year}>{listItem?.year}</Text>
+            </View>
+          )}
+        </View>
+        {listItem?.rating && (
+          <View style={styles.itemRatingContainer}>
+            <FastImage
+              imageStyle={styles.icon}
+              cover
+              source={ImageConst.pgRatingIcon}
+            />
+            <Text>{listItem?.rating}</Text>
+          </View>
+        )}
+
+        {listItem?.score && (
+          <View style={styles.itemScoreContainer}>
+            <FastImage
+              imageStyle={styles.icon}
+              cover
+              source={ImageConst.scoreIcon}
+            />
+            <Text
+              style={{fontWeight: 'bold', fontSize: SizeClass.scaleFont(15)}}>
+              {listItem?.score}
+            </Text>
+          </View>
+        )}
+        <View style={styles.favContainer}>
+          <ButtonWithImage
+            icon={listItem?.favourite ? ImageConst.fav : ImageConst.unfav}
+            IconStyle={{
+              width: SizeClass.LARGE_MARGIN,
+              height: SizeClass.LARGE_MARGIN,
+            }}
+            onPress={() => {
+              onPressMarkUnMarkFavourite(listItem);
+            }}
+          />
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
