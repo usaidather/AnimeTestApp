@@ -3,6 +3,7 @@ const ScreenConst = {
   Completed: 'Completed',
   Upcoming: 'Upcoming',
   Anime: 'Anime',
+  search: 'Search Anime',
 };
 
 export default ScreenConst;

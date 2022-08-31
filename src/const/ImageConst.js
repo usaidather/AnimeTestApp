@@ -6,4 +6,5 @@ export default {
   pgRatingIcon: require('../assets/images/rating.png'),
   fav: require('../assets/images/fav.png'),
   unfav: require('../assets/images/unfav.png'),
+  emptyData: require('../assets/images/empty-box.png'),
 };

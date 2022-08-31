@@ -4,7 +4,7 @@ import {ColorConst, ScreenConst, StringConst} from '../../const';
 import {Header, AnimeList} from '../../components/';
 
 export default function AnimeListAiring(props) {
-  const {anime, onEndReached, isLoading, isLoadingMore} = props;
+  const {anime, onEndReached, isLoading, isLoadingMore,onSearchKeyPress} = props;
 
   return (
     <View style={styles.container}>
@@ -14,6 +14,7 @@ export default function AnimeListAiring(props) {
         data={anime}
         onEndReached={onEndReached}
         isLoadingMore={isLoadingMore}
+        onSearchKeyPress= {onSearchKeyPress}
       />
     </View>
   );

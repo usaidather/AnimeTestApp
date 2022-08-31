@@ -9,7 +9,7 @@ export default function FavouriteAnimeList(props) {
   return (
     <View style={styles.container}>
       <Header title={StringConst.Anime} />
-      <AnimeList data={anime} />
+      <AnimeList hideSearchBar={true} data={anime} />
     </View>
   );
 }
