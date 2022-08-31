@@ -15,23 +15,25 @@ export default function AnimeListAiringIndex(props) {
   const ITEM_LIMIT = 10;
 
   useEffect(() => {
-    if (!isLoading) {
+    if (!isLoading && !isLoadingMore) {
       setIsLoading(true);
       callAnimeListAPI(page, FILTER, ITEM_LIMIT, searchQuery);
     }
   }, []);
 
   const onSearchKeyPress = text => {
-    setResponse(null);
-    setAnimeList([]);
-    setPage(1);
-    setSearchQuery(text);
-    setIsLoading(true);
-    callAnimeListAPI(page, FILTER, ITEM_LIMIT, text);
+    if (!isLoading && !isLoadingMore) {
+      setResponse(null);
+      setAnimeList([]);
+      setPage(1);
+      setSearchQuery(text);
+      setIsLoading(true);
+      callAnimeListAPI(page, FILTER, ITEM_LIMIT, text);
+    }
   };
 
   const onEndReached = () => {
-    if (response?.pagination?.has_next_page) {
+    if (!isLoading && !isLoadingMore && response?.pagination?.has_next_page) {
       setIsLoadingMore(true);
       callAnimeListAPI(page, FILTER, ITEM_LIMIT, searchQuery);
     } else {
@@ -56,7 +58,7 @@ export default function AnimeListAiringIndex(props) {
       .catch(error => {
         alert(error);
         setIsLoading(false);
-        setIsLoadingMore(true);
+        setIsLoadingMore(false);
       });
   };
 

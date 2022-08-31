@@ -39,14 +39,13 @@ export default function AnimeList(props) {
     [],
   );
 
-  const renderItem = ({item}) => (
-    <AnimeListItem item={item} onPressMarkUnMarkFavourite />
-  );
+  const renderItem = ({item}) => <AnimeListItem item={item} />;
 
   const renderSearchViewInList = () => {
     return (
       <View style={styles.searchFieldContainer}>
         <TextInput
+          placeholderTextColor={'gray'}
           style={styles.searchField}
           onChangeText={text => {
             if (!isLoading) {
@@ -97,5 +96,6 @@ const styles = StyleSheet.create({
     width: '90%',
     height: 1.8 * SizeClass.LARGE_MARGIN,
     marginHorizontal: SizeClass.LARGE_MARGIN,
+    color: ColorConst.black,
   },
 });

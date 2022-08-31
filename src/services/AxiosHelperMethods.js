@@ -1,9 +1,11 @@
 export const requestInterceptor = config => {
   const accessToken = '';
 
-  if (accessToken != null) {
-    config.headers['x-auth'] = accessToken;
-  }
+  // if (accessToken != null) {
+  //   config.headers['x-auth'] = accessToken;
+  // }
+  config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+  config.headers['Accept'] = 'application/json';
 
   console.log('Headers:', config.headers);
   console.log('Method:', config.method);

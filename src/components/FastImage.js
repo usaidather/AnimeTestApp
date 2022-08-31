@@ -24,6 +24,24 @@ export default function CustomFastImage(props) {
         containerStyle,
       ]}>
       <FastImage
+        style={[{width: 200, height: 200, position: 'absolute'}, imageStyle]}
+        resizeMode={
+          props.cover
+            ? FastImage.resizeMode.cover
+            : props.stretch
+            ? FastImage.resizeMode.stretch
+            : FastImage.resizeMode.contain
+        }
+        {...props}
+        source={ImageConst.placeHolder}
+        onLoadStart={() => {
+          setIsLoading(true);
+        }}
+        onLoadEnd={() => {
+          setIsLoading(false);
+        }}></FastImage>
+
+      <FastImage
         style={[{width: 200, height: 200}, imageStyle]}
         resizeMode={
           props.cover
