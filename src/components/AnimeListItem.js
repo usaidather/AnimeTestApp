@@ -7,17 +7,20 @@ import {markFavourite, unMarkFavourite} from '../redux/FavouriteSlice';
 import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/core';
 
+// ANIME FLAT LIST ITEM.
 export default function AnimeListItem(props) {
   let {item} = props;
+
   const [listItem, setListItem] = useState(item);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
+  // on press of list item.
   const onPress = () => {
-    console.log('LISTITEM:', listItem);
     navigation.navigate(ScreenConst.ANIMELISTDETAIL, {item: listItem});
   };
 
+  // to mark fav/unfav item.
   const onPressMarkUnMarkFavourite = item => {
     let favouriteItem = item;
     setListItem({
@@ -26,6 +29,7 @@ export default function AnimeListItem(props) {
         favouriteItem?.favorite != null ? !favouriteItem?.favorite : true,
     });
 
+    // handling it through redux...
     if (item?.favourite) {
       dispatch(unMarkFavourite(favouriteItem));
     } else {

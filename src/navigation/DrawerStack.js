@@ -7,6 +7,7 @@ import BottomTabStack from './BottomTabStack';
 import {ColorConst} from '../const';
 import {SizeClass} from '../utils/AppTheme';
 
+//Drawer stack
 const Drawer = createDrawerNavigator();
 
 export default function DrawerStack() {

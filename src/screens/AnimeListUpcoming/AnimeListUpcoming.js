@@ -3,6 +3,7 @@ import React from 'react';
 import {Header, AnimeList} from '../../components/';
 import {ColorConst, StringConst} from '../../const';
 
+// UI Component of the screen.
 export default function AnimeListUpcoming(props) {
   const {anime, onEndReached, isLoading, isLoadingMore, onSearchKeyPress} =
     props;

@@ -13,7 +13,8 @@ const persistConfig = {
   version: 1,
   storage: AsyncStorage,
   // whitelist: ['favourites'],
-  blacklist: ['rfavourites'],
+  // not to persist favourites
+  blacklist: ['favourites'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

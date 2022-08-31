@@ -1,17 +1,8 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity,
-  TextInput,
-  ActivityIndicator,
-} from 'react-native';
+import {StyleSheet, View, FlatList, TextInput} from 'react-native';
 import React, {useState, useCallback} from 'react';
-import {ColorConst, ImageConst, ScreenConst, StringConst} from '../const';
+import {ColorConst, StringConst} from '../const';
 import {SizeClass} from '../utils/AppTheme';
-import {FastImage, AnimeListItem, Loader, EmptyView} from '.';
-// import {debounce} from 'lodash';
+import {AnimeListItem, Loader, EmptyView} from '.';
 
 export default function AnimeList(props) {
   const {
@@ -24,6 +15,7 @@ export default function AnimeList(props) {
   } = props;
   const [search, setSearch] = useState('');
 
+  // to add delay in to search textfield keys press.
   const debounce = (fn, delay) => {
     let timerId;
     return (...args) => {
@@ -32,6 +24,7 @@ export default function AnimeList(props) {
     };
   };
 
+  // delaying of 0.8 sec to call api on main calling class from where this is called.
   const debouncedHandler = useCallback(
     debounce(text => {
       onSearchKeyPress(text);
@@ -39,8 +32,10 @@ export default function AnimeList(props) {
     [],
   );
 
+  // render function of list item...
   const renderItem = ({item}) => <AnimeListItem item={item} />;
 
+  // render search view with search text input.
   const renderSearchViewInList = () => {
     return (
       <View style={styles.searchFieldContainer}>
@@ -59,6 +54,7 @@ export default function AnimeList(props) {
     );
   };
 
+  // generic Anime list view...
   return (
     <View style={{flex: 1, paddingVertical: SizeClass.SMALL_MARGIN}}>
       {!hideSearchBar && renderSearchViewInList()}

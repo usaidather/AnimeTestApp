@@ -3,6 +3,7 @@ import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {ColorConst} from '../const';
 import {SizeClass} from '../utils/AppTheme';
 
+// Custom bottom tabbar...
 export default function CustomBottomTabBar({
   state,
   descriptors,

@@ -1,6 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {ScreenConst, StringConst} from '../const';
+import {ScreenConst} from '../const';
 
 import AnimeListAiring from '../screens/AnimeListAiring/AnimeListAiringIndex';
 import AnimeListComplete from '../screens/AnimeListComplete/AnimeListCompleteIndex';
@@ -9,6 +9,7 @@ import AnimeListDetail from '../screens/AnimeListDetail/AnimeListDetailIndex';
 
 const Stack = createNativeStackNavigator();
 
+// Bottom tab navigation stacks...
 const AnimeListAiringStackNavigator = () => {
   return (
     <Stack.Navigator

@@ -3,6 +3,7 @@ import {getAnimeList} from '../../services/APIS/AnimeAPI';
 import {StyleSheet, Text, View} from 'react-native';
 import AnimeListUpcoming from './AnimeListUpcoming';
 
+// all the business logic of this screen...
 export default function AnimeListUpcomingIndex(props) {
   const [response, setResponse] = useState(null);
   const [animeList, setAnimeList] = useState([]);
@@ -21,6 +22,7 @@ export default function AnimeListUpcomingIndex(props) {
     }
   }, []);
 
+  // handling search of anime lists
   const onSearchKeyPress = text => {
     if (!isLoading && !isLoadingMore) {
       setResponse(null);
@@ -33,6 +35,7 @@ export default function AnimeListUpcomingIndex(props) {
     }
   };
 
+  // hanlding pagination ...
   const onEndReached = () => {
     if (!isLoading && !isLoadingMore && response?.pagination?.has_next_page) {
       setIsLoadingMore(true);
@@ -41,7 +44,7 @@ export default function AnimeListUpcomingIndex(props) {
       setIsLoadingMore(false);
     }
   };
-
+  // generic api call.
   const callAnimeListAPI = (page, filter, limit, searchQuery) => {
     getAnimeList(page, filter, limit, searchQuery)
       .then(response => {

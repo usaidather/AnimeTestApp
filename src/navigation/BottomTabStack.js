@@ -7,10 +7,8 @@ import {
   AnimeListCompletedStackNavigator,
   AnimeListUpcomingStackNavigator,
 } from './BottomTabNavigationStack';
-// import AnimeListAiring from '../screens/AnimeListAiring/AnimeListAiringIndex';
-// import AnimeListComplete from '../screens/AnimeListComplete/AnimeListCompleteIndex';
-// import AnimeListUpcoming from '../screens/AnimeListUpcoming/AnimeListUpcomingIndex';
 
+// Bottom Tab Stack...
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabStack() {

@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import AnimeListDetail from './AnimeListDetail';
 import {getAnimeById} from '../../services/APIS/AnimeAPI';
 
+// buisness logic
 export default function AnimeListDetailIndex(props) {
   const {item} = props?.route?.params;
   const [detail, setDetail] = useState(null);
@@ -12,6 +13,7 @@ export default function AnimeListDetailIndex(props) {
     setIsLoading(true);
     getAnimeById(item?.mal_id)
       .then(response => {
+        // adding favourite value manually as this is not from the api.
         setDetail({
           ...response?.data?.data,
           favourite: item?.favourite,

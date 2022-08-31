@@ -3,6 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import AnimeListAiring from './AnimeListAiring';
 import {getAnimeList} from '../../services/APIS/AnimeAPI';
 
+// to handle all the business logics
 export default function AnimeListAiringIndex(props) {
   const [response, setResponse] = useState(null);
   const [animeList, setAnimeList] = useState([]);
@@ -21,6 +22,7 @@ export default function AnimeListAiringIndex(props) {
     }
   }, []);
 
+  // handling search of anime lists
   const onSearchKeyPress = text => {
     if (!isLoading && !isLoadingMore) {
       setResponse(null);
@@ -32,6 +34,7 @@ export default function AnimeListAiringIndex(props) {
     }
   };
 
+  // hanlding pagination ...
   const onEndReached = () => {
     if (!isLoading && !isLoadingMore && response?.pagination?.has_next_page) {
       setIsLoadingMore(true);
@@ -41,6 +44,7 @@ export default function AnimeListAiringIndex(props) {
     }
   };
 
+  // generic api call.
   const callAnimeListAPI = (page, filter, limit, searchQuery) => {
     getAnimeList(page, filter, limit, searchQuery)
       .then(response => {

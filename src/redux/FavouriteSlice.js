@@ -7,6 +7,7 @@ export const favouriteSlice = createSlice({
     favourites: [],
   },
   reducers: {
+    // adding item to favourite list...
     markFavourite: (state, action) => {
       let favourite = {
         ...action.payload,
@@ -17,6 +18,7 @@ export const favouriteSlice = createSlice({
       state.favourites = favourites;
     },
 
+    // removing the fav list...
     unMarkFavourite: (state, action) => {
       let id = action.payload?.mal_id;
       const filteredFav = state.favourites.filter(

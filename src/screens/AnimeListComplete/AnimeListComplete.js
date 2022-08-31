@@ -1,8 +1,9 @@
 import {View, StyleSheet} from 'react-native';
 import React from 'react';
 import {Header, AnimeList} from '../../components/';
-import {ColorConst, ScreenConst, StringConst} from '../../const';
+import {ColorConst, StringConst} from '../../const';
 
+// all  UI Component of the screen.
 export default function AnimeListComplete(props) {
   const {anime, onEndReached, isLoading, isLoadingMore, onSearchKeyPress} =
     props;
