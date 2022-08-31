@@ -6,10 +6,10 @@ const ScreenConst = {
   ANIMELISTUPCOMING: 'Upcoming',
   ANIMELISTUPCOMINGTSTACK: 'Upcoming Stack',
   ANIMELISTDETAIL: 'Detail',
-  FAVOURITEANIMELIST: 'Favourites',
+  FAVOURITEANIMELIST: 'Favourite',
   ANIMEBOTTOMTAB: 'Home',
   APPSTACK: 'APP STACK',
-
+  FAVSTACK: 'Favourites',
 };
 
 export default ScreenConst;

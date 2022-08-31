@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {SizeClass} from '../utils/AppTheme';
 import {ColorConst, ImageConst, ScreenConst} from '../const';
@@ -15,6 +15,11 @@ export default function AnimeListItem(props) {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
+  useEffect(() => {
+    console.log('FAV:', listItem?.favourite);
+    // alert(listItem?.favourite);
+  }, [listItem?.favourite]);
+
   // on press of list item.
   const onPress = () => {
     navigation.navigate(ScreenConst.ANIMELISTDETAIL, {item: listItem});
@@ -22,17 +27,18 @@ export default function AnimeListItem(props) {
 
   // to mark fav/unfav item.
   const onPressMarkUnMarkFavourite = item => {
-    let favouriteItem = item;
-    setListItem({
-      ...favouriteItem,
-      favourite:
-        favouriteItem?.favorite != null ? !favouriteItem?.favorite : true,
-    });
-
     // handling it through redux...
-    if (item?.favourite) {
-      dispatch(unMarkFavourite(favouriteItem));
+    if (listItem?.favourite) {
+      dispatch(unMarkFavourite(listItem));
+      setListItem({
+        ...listItem,
+        favourite: false,
+      });
     } else {
+      setListItem({
+        ...listItem,
+        favourite: true,
+      });
       dispatch(markFavourite(listItem));
     }
   };
